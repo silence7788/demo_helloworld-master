@@ -22,18 +22,12 @@ jobs:
        echo 【The war package as below:】
        cp Dockerfile /tmp
        cp -p ./target/hello-world.war /tmp/
-  image-build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: docker build
-        run: |
-          docker build -t helloworld-maven:v1 /tmp/Dockerfile
-          docker images | grep helloworld
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run application in container
-        run: |
-          docker run --name hello -p 8080:8080 helloworld-maven:v1
-          sleep 30
-          curl http://localhost:8080
+    - name: docker build
+      run: |
+        docker build -t helloworld-maven:v1 .
+        docker images | grep helloworld
+    - name: Run application in container
+      run: |
+        docker run --name hello -p 8080:8080 helloworld-maven:v1
+        sleep 30
+        curl http://localhost:8080

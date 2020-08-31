@@ -26,8 +26,15 @@ jobs:
       run: |
         docker build -t helloworld-maven:v1 .
         docker images | grep helloworld
-    - name: Run application in container
-      run: |
-        docker run --name hello -d -p 8080:8080 helloworld-maven:v1
+  docker-run:
+    runs-on: ubuntu-latest
+    services: 
+      tomcat:
+        image: helloworld-maven:v1
+        ports:
+        - 8080:8080
+    steps:
+    - name: Test service
+      run:
         sleep 30
         curl http://localhost:8080

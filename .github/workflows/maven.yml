@@ -9,9 +9,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
@@ -23,3 +21,20 @@ jobs:
        mvn -B package --file pom.xml
        echo 【The war package as below:】
        ls -l ./target/
+  image-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: docker build
+        run: |
+          docker build -t helloworld-maven:v1
+          docker images | grep helloworld
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run application in container
+        run: |
+          docker run --name hello -p 8080:8080 helloworld-maven:v1
+          sleep 30
+          curl http://localhost:8080
+      
+      

@@ -28,6 +28,6 @@ jobs:
         docker images | grep helloworld
     - name: Run application in container
       run: |
-        docker run --name hello -p 8080:8080 helloworld-maven:v1
+        docker run --name hello -d -p 8080:8080 helloworld-maven:v1
         sleep 30
         curl http://localhost:8080

@@ -20,21 +20,17 @@ jobs:
       run: |
        mvn -B package --file pom.xml
        echo 【The war package as below:】
-       cp Dockerfile /tmp
-       cp -p ./target/hello-world.war /tmp/
-    - name: docker build
+       ls -l ./target/
+    - name: docker-build
       run: |
         docker build -t helloworld-maven:v1 .
-        docker images | grep helloworld
-  docker-run:
-    runs-on: ubuntu-latest
-    services: 
+#        docker push silence7788/helloworld-maven:v1
+    service:
       tomcat:
         image: helloworld-maven:v1
         ports:
         - 8080:8080
-    steps:
-    - name: Test service
+      name: Test service
       run:
         sleep 30
         curl http://localhost:8080

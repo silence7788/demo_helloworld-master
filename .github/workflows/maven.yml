@@ -23,5 +23,3 @@ jobs:
        mvn -B package --file pom.xml
        echo 【The war package as below:】
        ls -l ./target/
-    - name: Setup Debug Session
-      uses: csexton/debugger-action@master

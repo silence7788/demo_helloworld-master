@@ -37,6 +37,12 @@ jobs:
             name: package
         - name: docker-build
           run: |
-            docker build -t helloworld-maven:v1 .
+            docker build -t silence7788/helloworld/helloworld-maven:v1 .
             docker images
-#            docker push silence7788/helloworld-maven:v1
+        - name: Push to Docker Hub
+          uses: docker/build-push-action@v1
+          with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+            repository: silence7788/helloworld
+            tag_with_ref: true

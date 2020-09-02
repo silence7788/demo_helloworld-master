@@ -53,6 +53,8 @@ jobs:
           image: silence7788/helloworld
           ports:
           - 8080:8080
+    steps:
+      - name: service test
         run: |
           sleep 30
           curl http://localhost:8080

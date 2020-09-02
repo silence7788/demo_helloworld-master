@@ -46,3 +46,13 @@ jobs:
             password: ${{ secrets.DOCKERHUB_TOKEN }}
             repository: silence7788/helloworld
             tag_with_ref: true
+  deploy:
+    runs-on: ubuntu-latest
+    services:
+        tomcat:
+          image: silence7788/helloworld
+          ports:
+          - 8080:8080
+        run: |
+          sleep 30
+          curl http://localhost:8080

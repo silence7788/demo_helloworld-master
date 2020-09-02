@@ -24,7 +24,9 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: package
-        path: ./target/hello-world.war
+        path: |
+          ./target/hello-world.war
+          Dockerfile
 #docker image build 
   docker-build:
       runs-on: ubuntu-latest
